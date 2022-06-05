@@ -2,7 +2,7 @@
 id: usaco-736
 source: USACO Bronze 2017 US Open
 title: Bovine Genomics
-author: Mrinall Umasudhan, Ananth Kashyap, Ben Dodge
+author: Mrinall Umasudhan, Ananth Kashyap, Ben Dodge, Dongkyu Choi
 ---
 
 [Official Analysis (C++)](http://www.usaco.org/current/data/sol_cownomics_bronze_open17.html)
@@ -170,6 +170,36 @@ public class BovineGenomics {
 ```
 
 </JavaSection>
+<PySection>
+
+## Implementation
+
+**Time Complexity:** $\mathcal{O}(NM)$
+
+```py
+with open('cownomics.in') as read:
+    N, M = map(int, read.readline().split())
+    spotty, plain = [], []
+    for _ in range(N):
+        spotty.append([c for c in read.readline()])
+    for _ in range(N):
+        plain.append([c for c in read.readline()])
+
+# for each place, check if there's any common character
+# between spotty set and plain set
+valid_locations = 0
+for k in range(M):
+    spotty_set = set(spotty[n][k] for n in range(N))
+    plain_set = set(plain[n][k] for n in range(N))
+
+    # place is valid if spotty and plain are exclusive for the place
+    if len(spotty_set.intersection(plain_set)) == 0:
+        valid_locations += 1
+
+print(valid_locations, file=open('cownomics.out', 'w'))
+```
+
+</PySection>
 </LanguageSection>
 
 
